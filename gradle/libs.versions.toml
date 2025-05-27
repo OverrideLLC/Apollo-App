@@ -1,0 +1,84 @@
+[versions]
+kotlin = "2.1.21"
+
+#COMPOSE
+androidx-lifecycle = "2.9.0"
+composeHotReload = "1.0.0-alpha10"
+composeMultiplatform = "1.8.1"
+androidx-navigation = "2.7.0-alpha07"
+
+#DB
+androidx-room = "2.7.0"
+androidx-sqliteBundled = "2.5.0"
+
+#GEMINI
+generativeai = "0.10.0"
+generativeaiGoogleWasmJs = "0.9.0-1.0.1-wasm"
+
+#KOIN
+koin = "4.0.0"
+
+#KTOR
+ktor = "3.1.3"
+
+#UTILS
+qr-kit = "3.0.6"
+google-services = "4.4.2"
+
+#KOTLINX
+kotlinxDatetime = "0.6.2"
+kotlinx-coroutines = "1.10.2"
+ksp = "2.1.21-2.0.1"
+kotlinxSerializationJson = "1.6.3"
+
+#TEST
+junit = "4.13.2"
+
+[libraries]
+
+#COMPOSE
+androidx-lifecycle-viewmodel = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-runtimeCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
+androidx-navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "androidx-navigation" }
+
+#DB
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "androidx-room" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "androidx-room" }
+androidx-sqliteBundled = { group = "androidx.sqlite", name = "sqlite-bundled", version.ref = "androidx-sqliteBundled" }
+androidx-room-compailer = { group = "androidx.room", name = "room-compiler", version.ref = "androidx-room" }
+
+#KOIN
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
+koin-composeVM = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin" }
+
+#UTILS
+qr-kit = { module = "network.chaintech:qr-kit", version.ref = "qr-kit" }
+
+#KOTLINX
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
+kotlinx-coroutinesSwing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+
+#KTOR
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-client-contentNegotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-client-cio-jvm = { module = "io.ktor:ktor-client-cio-jvm", version.ref = "ktor" }
+ktor-client-js = { module = "io.ktor:ktor-client-js", version.ref = "ktor" } # Este es el motor para JS y Wasm-JS
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
+
+#TEST
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+kotlin-testJunit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
+junit = { module = "junit:junit", version.ref = "junit" }
+
+[plugins]
+composeHotReload = { id = "org.jetbrains.compose.hot-reload", version.ref = "composeHotReload" }
+composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
+composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+androidxRoom = { id = "androidx.room", version.ref = "androidx-room" }
+google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
