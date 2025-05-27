@@ -57,7 +57,7 @@ private fun TaskScreen(
 ) {
     Box(
         modifier = modifier
-            .background(colorScheme.surface.copy(alpha = 0.7f))
+            .background(colorScheme.surfaceContainer.copy(alpha = 0.7f))
             .clip(MaterialTheme.shapes.medium),
         content = {
             Column(
@@ -81,7 +81,7 @@ private fun TaskScreen(
                         .align(Alignment.End)
                         .padding(10.dp)
                         .background(
-                            color = colorScheme.onTertiary,
+                            color = colorScheme.surface,
                             shape = shapes.small
                         )
                 )

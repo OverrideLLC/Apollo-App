@@ -147,12 +147,12 @@ internal fun TextFieldAi(
                 onClick = { attachMenuExpanded = true },
                 modifier = Modifier
                     .size(55.dp)
-                    .background(colorScheme.onSurface, shapes.medium)
+                    .background(colorScheme.primaryContainer, shapes.medium)
             ) {
                 Icon(
                     painter = painterResource(Res.drawable.attach_file_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24),
                     contentDescription = "Abrir menú de adjuntos", // Ya estaba en español o es un buen punto de partida
-                    tint = colorScheme.surface,
+                    tint = colorScheme.primary,
                 )
             }
             DropdownMenu( // Usando androidx.compose.material.DropdownMenu

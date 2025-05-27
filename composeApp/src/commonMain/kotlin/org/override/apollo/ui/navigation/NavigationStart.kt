@@ -13,7 +13,7 @@ fun NavigationStart() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = RoutesStart.Start.route
+        startDestination = RoutesStart.Home.route
     ) {
         composable(RoutesStart.Start.route) {
             StartRoot(navController = navController)

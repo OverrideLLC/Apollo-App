@@ -49,6 +49,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import apollo_app.composeapp.generated.resources.Res
+import apollo_app.composeapp.generated.resources.TTNegro
 import apollo_app.composeapp.generated.resources.qr_code_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24
 import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.viewmodel.koinViewModel
@@ -105,25 +106,12 @@ private fun StartScreen(
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                // Logo circular similar al de la home
-                Surface(
-                    modifier = Modifier
-                        .size(80.dp)
-                        .clip(CircleShape),
-                    color = MaterialTheme.colorScheme.primary,
-                    shadowElevation = 8.dp
-                ) {
-                    Box(
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = "T",
-                            fontSize = 32.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = Color.White
-                        )
-                    }
-                }
+                Icon(
+                    painter = painterResource(Res.drawable.TTNegro),
+                    contentDescription = "TaskTec Logo",
+                    modifier = Modifier.size(100.dp),
+                    tint = MaterialTheme.colorScheme.primary
+                )
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
                     text = "TaskTec",
@@ -143,7 +131,7 @@ private fun StartScreen(
         // Main login card
         Card(
             modifier = Modifier
-                .width(400.dp)
+                .fillMaxWidth(0.6f)
                 .padding(24.dp),
             elevation = CardDefaults.cardElevation(defaultElevation = 16.dp),
             shape = RoundedCornerShape(24.dp),

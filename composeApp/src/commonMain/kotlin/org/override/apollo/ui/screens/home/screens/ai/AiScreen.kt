@@ -40,7 +40,7 @@ private fun AiScreen(
 ) {
     Box(
         modifier = modifier
-            .background(colorScheme.surface.copy(alpha = 0.7f))
+            .background(colorScheme.surfaceContainer.copy(alpha = 0.7f))
             .clip(MaterialTheme.shapes.medium),
         content = {
             val initiallyVisible = state.messages.isNotEmpty()

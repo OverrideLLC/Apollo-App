@@ -22,14 +22,14 @@ fun TextStyleBrush(): TextStyle {
     val infiniteTransition = rememberInfiniteTransition()
     val color1 by infiniteTransition.animateColor(
         initialValue = colorScheme.primary,
-        targetValue = colorScheme.onTertiary,
+        targetValue = colorScheme.onSurface,
         animationSpec = infiniteRepeatable(
             animation = tween(3000, easing = LinearEasing),
             repeatMode = RepeatMode.Reverse
         )
     )
     val color2 by infiniteTransition.animateColor(
-        initialValue = colorScheme.onTertiary,
+        initialValue = colorScheme.onSurface,
         targetValue = colorScheme.primary,
         animationSpec = infiniteRepeatable(
             animation = tween(

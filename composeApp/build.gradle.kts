@@ -81,6 +81,7 @@ kotlin {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutinesSwing)
             implementation(libs.ktor.client.cio.jvm)
+            implementation(libs.slf4j)
 
             //DB
             implementation(libs.androidx.room.runtime)

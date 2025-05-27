@@ -94,11 +94,11 @@ internal fun Chat(
             },
             modifier = Modifier
                 .align(Alignment.TopEnd)
-                .padding(top = 8.dp, end = 8.dp)
+                .padding(top = 16.dp, end = 16.dp)
                 .padding(horizontal = 8.dp)
                 .size(24.dp)
                 .background(
-                    color = colorScheme.onTertiary,
+                    color = colorScheme.surface.copy(alpha = 0.7f),
                     shape = shapes.small
                 ),
             content = {

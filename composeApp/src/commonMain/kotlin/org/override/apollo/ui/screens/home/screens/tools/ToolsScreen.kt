@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import apollo_app.composeapp.generated.resources.Res
+import apollo_app.composeapp.generated.resources.dock_to_left_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24
 import apollo_app.composeapp.generated.resources.dock_to_right_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24
 import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.viewmodel.koinViewModel
@@ -71,7 +72,7 @@ private fun ToolsScreen(
 ) {
     Box(
         modifier = modifier
-            .background(colorScheme.surface.copy(alpha = 0.7f))
+            .background(colorScheme.surfaceContainer.copy(alpha = 0.7f))
             .clip(shape = shapes.medium),
         content = {
             Column(
@@ -85,17 +86,17 @@ private fun ToolsScreen(
                     },
                     content = {
                         Icon(
-                            painter = painterResource(Res.drawable.dock_to_right_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24),
+                            painter = painterResource(Res.drawable.dock_to_left_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24),
                             contentDescription = "Dock to right",
                             modifier = Modifier.size(24.dp),
                             tint = colorScheme.primary
                         )
                     },
                     modifier = Modifier
-                        .align(Alignment.End)
+                        .align(Alignment.Start)
                         .padding(10.dp)
                         .background(
-                            color = colorScheme.onTertiary,
+                            color = colorScheme.surface,
                             shape = shapes.small
                         )
                 )
@@ -145,7 +146,7 @@ fun ItemTool(
                 .height(50.dp)
                 .clickable { click() }
                 .background(
-                    color = colorScheme.onTertiary,
+                    color = colorScheme.surface,
                     shape = shapes.small
                 ),
             contentAlignment = Alignment.Center,
@@ -178,7 +179,7 @@ fun ItemTool(
             modifier = Modifier
                 .size(50.dp)
                 .background(
-                    color = colorScheme.background,
+                    color = colorScheme.surface,
                     shape = shapes.small
                 )
                 .clickable { click() },

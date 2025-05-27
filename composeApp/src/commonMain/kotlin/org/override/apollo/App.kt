@@ -12,7 +12,7 @@ import org.override.apollo.ui.theme.ApolloTheme
 @Composable
 fun App() {
     ApolloTheme(
-        darkTheme = true
+        darkTheme = false
     ) {
         Surface(
             modifier = Modifier.fillMaxSize(),

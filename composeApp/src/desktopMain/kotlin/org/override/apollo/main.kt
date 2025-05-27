@@ -10,7 +10,7 @@ fun main() = application {
     initKoin()
     Window(
         onCloseRequest = ::exitApplication,
-        title = "Apollo-App",
+        title = "Apollo",
         state = rememberWindowState(placement = WindowPlacement.Maximized)
     ) {
         App()
