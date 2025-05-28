@@ -5,8 +5,10 @@ import org.koin.core.module.Module
 import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
 import org.override.apollo.domain.commonHttpClient
+import org.override.apollo.domain.repositories.CourseRepository
 import org.override.apollo.domain.repositories.GeminiRepository
 import org.override.apollo.domain.repositories.LoginRepository
+import org.override.apollo.domain.service.CourseService
 import org.override.apollo.domain.service.GeminiService
 import org.override.apollo.domain.service.LoginService
 
@@ -15,7 +17,9 @@ val DomainModule: Module
         single<HttpClient> { commonHttpClient }
         factoryOf(::LoginRepository)
         factoryOf(::GeminiRepository)
+        factoryOf(::CourseRepository)
 
         factoryOf(::LoginService)
         factoryOf(::GeminiService)
+        factoryOf(::CourseService)
     }

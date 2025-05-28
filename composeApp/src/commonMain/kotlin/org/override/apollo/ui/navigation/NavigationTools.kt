@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import org.override.apollo.ui.screens.home.screens.tools.screens.add_course.AddCourseRoot
 import org.override.apollo.ui.screens.home.screens.tools.screens.add_student.AddStudentRoot
+import org.override.apollo.ui.screens.home.screens.tools.screens.take_attendance.TakeAttendanceRoot
 import org.override.apollo.utils.route.RoutesTool
 
 @Composable
@@ -17,17 +18,10 @@ fun NavigationTools(
         navController = navController,
         startDestination = route
     ) {
-        composable(RoutesTool.AddClass.route) {
-            AddCourseRoot()
-        }
-        composable(RoutesTool.AddStudent.route) {
-            AddStudentRoot()
-        }
-        composable(RoutesTool.TakeAttendees.route) {
-        }
-        composable(RoutesTool.Ratings.route) {
-        }
-        composable(RoutesTool.Announce.route) {
-        }
+        composable(RoutesTool.AddClass.route) { AddCourseRoot() }
+        composable(RoutesTool.AddStudent.route) { AddStudentRoot() }
+        composable(RoutesTool.TakeAttendees.route) { TakeAttendanceRoot() }
+        composable(RoutesTool.Ratings.route) {}
+        composable(RoutesTool.Announce.route) {}
     }
 }

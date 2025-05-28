@@ -8,8 +8,14 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import org.override.apollo.domain.repositories.CourseRepository
+import org.override.apollo.utils.data.Course
+import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
 
-class AddCourseViewModel : ViewModel() {
+class AddCourseViewModel(
+    private val repository: CourseRepository
+) : ViewModel() {
 
     private val _state = MutableStateFlow(AddCourseState())
 
@@ -78,6 +84,7 @@ class AddCourseViewModel : ViewModel() {
                 state.grade.isNotBlank()
     }
 
+    @OptIn(ExperimentalUuidApi::class)
     private fun saveCourse() {
         val currentState = _state.value
 
@@ -92,17 +99,20 @@ class AddCourseViewModel : ViewModel() {
             _state.value = currentState.copy(isLoading = true, errorMessage = null)
 
             try {
-                // Simular guardado del curso
-                kotlinx.coroutines.delay(1500) // Simular operación de red
-
-                // Aquí iría la lógica real para guardar el curso
-                // Por ejemplo: courseRepository.saveCourse(...)
-
-                // Éxito - limpiar formulario
-                _state.value = AddCourseState()
-
-                // Notificar éxito (esto podría ser manejado por el componente padre)
-
+                repository.createCourse(
+                    Course(
+                        id = Uuid.random().toString(),
+                        name = currentState.courseName,
+                        career = currentState.career,
+                        section = currentState.section,
+                        degree = currentState.grade,
+                        teacherId = "TEACHER_007",
+                        studentIds = emptyList(),
+                        attendanceIds = emptyMap(),
+                        assignmentsIds = emptyList()
+                    )
+                )
+                resetState()
             } catch (e: Exception) {
                 _state.value = currentState.copy(
                     isLoading = false,
