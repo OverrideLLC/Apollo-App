@@ -7,6 +7,8 @@ import org.override.apollo.ui.screens.home.HomeViewModel
 import org.override.apollo.ui.screens.home.screens.ai.AiViewModel
 import org.override.apollo.ui.screens.home.screens.task.TaskViewModel
 import org.override.apollo.ui.screens.home.screens.tools.ToolsViewModel
+import org.override.apollo.ui.screens.home.screens.tools.screens.add_course.AddCourseViewModel
+import org.override.apollo.ui.screens.home.screens.tools.screens.add_student.AddStudentViewModel
 import org.override.apollo.ui.screens.start.StartViewModel
 
 val viewModelModule: Module
@@ -16,4 +18,6 @@ val viewModelModule: Module
         viewModelOf(::ToolsViewModel)
         viewModelOf(::AiViewModel)
         viewModelOf(::TaskViewModel)
+        viewModelOf(::AddCourseViewModel)
+        viewModelOf(::AddStudentViewModel)
     }
