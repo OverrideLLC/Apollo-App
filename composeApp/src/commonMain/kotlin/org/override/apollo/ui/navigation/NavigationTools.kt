@@ -4,8 +4,10 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import org.override.apollo.ui.components.CourseCard
 import org.override.apollo.ui.screens.home.screens.tools.screens.add_course.AddCourseRoot
 import org.override.apollo.ui.screens.home.screens.tools.screens.add_student.AddStudentRoot
+import org.override.apollo.ui.screens.home.screens.tools.screens.courses.CoursesRoot
 import org.override.apollo.ui.screens.home.screens.tools.screens.take_attendance.TakeAttendanceRoot
 import org.override.apollo.utils.route.RoutesTool
 
@@ -23,5 +25,6 @@ fun NavigationTools(
         composable(RoutesTool.TakeAttendees.route) { TakeAttendanceRoot() }
         composable(RoutesTool.Ratings.route) {}
         composable(RoutesTool.Announce.route) {}
+        composable(RoutesTool.Courses.route) { CoursesRoot() }
     }
 }

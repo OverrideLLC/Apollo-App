@@ -1,10 +1,14 @@
 package org.override.apollo.ui.screens.start
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.Crossfade
+import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -18,7 +22,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -28,7 +31,6 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -101,7 +103,7 @@ private fun StartScreen(
         Box(
             modifier = Modifier
                 .align(Alignment.TopCenter)
-                .padding(top = 80.dp)
+                .padding(top = 32.dp)
         ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
@@ -222,39 +224,21 @@ private fun StartScreen(
 
                 Spacer(modifier = Modifier.height(32.dp))
 
-                // Login content based on selected method
-                AnimatedVisibility(
-                    visible = !showQrLogin,
-                    enter = slideInVertically(
-                        initialOffsetY = { it },
-                        animationSpec = tween(300)
-                    ) + fadeIn(animationSpec = tween(300)),
-                    exit = slideOutVertically(
-                        targetOffsetY = { -it },
-                        animationSpec = tween(300)
-                    ) + fadeOut(animationSpec = tween(300))
+                Crossfade(
+                    targetState = showQrLogin,
+                    animationSpec = tween(800)
                 ) {
-                    EmailPasswordLogin(
-                        state = state,
-                        onAction = onAction
-                    )
-                }
-
-                AnimatedVisibility(
-                    visible = showQrLogin,
-                    enter = slideInVertically(
-                        initialOffsetY = { it },
-                        animationSpec = tween(300)
-                    ) + fadeIn(animationSpec = tween(300)),
-                    exit = slideOutVertically(
-                        targetOffsetY = { -it },
-                        animationSpec = tween(300)
-                    ) + fadeOut(animationSpec = tween(300))
-                ) {
-                    QrLogin(
-                        state = state,
-                        onAction = onAction
-                    )
+                    if (showQrLogin) {
+                        QrLogin(
+                            state = state,
+                            onAction = onAction
+                        )
+                    } else {
+                        EmailPasswordLogin(
+                            state = state,
+                            onAction = onAction
+                        )
+                    }
                 }
             }
         }
@@ -293,7 +277,8 @@ private fun EmailPasswordLogin(
     onAction: (StartAction) -> Unit
 ) {
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.animateContentSize()
     ) {
         Text(
             text = "Iniciar sesión",
@@ -380,7 +365,8 @@ private fun QrLogin(
     onAction: (StartAction) -> Unit
 ) {
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.animateContentSize()
     ) {
         Text(
             text = "Iniciar con QR",

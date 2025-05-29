@@ -127,7 +127,7 @@ private fun Form(
                         ),
                     content = {
                         Text(
-                            text = if (state.selectedOption.isEmpty()) "Selecciona una opción" else state.selectedOption,
+                            text = state.selectedOption?.name ?: "Selecciona una opción",
                             style = MaterialTheme.typography.bodyLarge,
                             color = colorScheme.onSurface,
                             modifier = Modifier.padding(8.dp)

@@ -98,7 +98,7 @@ internal fun Chat(
                 .padding(horizontal = 8.dp)
                 .size(24.dp)
                 .background(
-                    color = colorScheme.surface.copy(alpha = 0.7f),
+                    color = colorScheme.surfaceContainerLowest.copy(alpha = 0.7f),
                     shape = shapes.small
                 ),
             content = {

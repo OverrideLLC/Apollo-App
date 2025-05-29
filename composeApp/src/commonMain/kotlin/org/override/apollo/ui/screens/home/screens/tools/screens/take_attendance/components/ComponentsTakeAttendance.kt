@@ -47,8 +47,8 @@ import apollo_app.composeapp.generated.resources.radio_button_unchecked_24dp_E3E
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.override.apollo.ui.screens.home.screens.tools.screens.take_attendance.utils.AttendanceMethod
-import org.override.apollo.ui.screens.home.screens.tools.screens.take_attendance.utils.Course
-import org.override.apollo.ui.screens.home.screens.tools.screens.take_attendance.utils.Student
+import org.override.apollo.utils.data.Course
+import org.override.apollo.utils.data.Student
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -103,11 +103,11 @@ fun CourseSelector(
                         text = {
                             Column {
                                 Text(
-                                    text = course.name,
+                                    text = course.name ?: "",
                                     fontWeight = FontWeight.Medium
                                 )
                                 Text(
-                                    text = "${course.career} - ${course.section} - ${course.grade}",
+                                    text = "${course.career} - ${course.section} - ${course.degree}",
                                     style = MaterialTheme.typography.bodySmall,
                                     color = colorScheme.onSurface
                                 )
@@ -377,7 +377,8 @@ fun StudentAttendanceItem(
 ) {
     val containerColorCard =
         if (isPresent) colorScheme.primaryContainer else colorScheme.errorContainer
-    val contentColorCard = if (isPresent) colorScheme.onPrimaryContainer else colorScheme.onErrorContainer
+    val contentColorCard =
+        if (isPresent) colorScheme.onPrimaryContainer else colorScheme.onErrorContainer
 
     Card(
         modifier = modifier
@@ -400,14 +401,14 @@ fun StudentAttendanceItem(
                 modifier = Modifier.weight(1f)
             ) {
                 Text(
-                    text = student.name,
+                    text = student.displayName,
                     style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.Medium,
                     color = contentColorCard
                 )
 
                 Text(
-                    text = "Matrícula: ${student.matricula}",
+                    text = "Matrícula: ${student.tuition}",
                     style = MaterialTheme.typography.bodySmall,
                     color = contentColorCard
                 )

@@ -1,9 +1,9 @@
 package org.override.apollo.ui.screens.home.screens.tools.screens.take_attendance
 
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Immutable
 import org.override.apollo.ui.screens.home.screens.tools.screens.take_attendance.utils.AttendanceMethod
-import org.override.apollo.ui.screens.home.screens.tools.screens.take_attendance.utils.Course
-import org.override.apollo.ui.screens.home.screens.tools.screens.take_attendance.utils.Student
+import org.override.apollo.utils.data.Course
+import org.override.apollo.utils.data.Student
 
 @Immutable
 data class TakeAttendanceState(

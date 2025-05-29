@@ -40,11 +40,11 @@ private fun AiScreen(
 ) {
     Box(
         modifier = modifier
-            .background(colorScheme.surfaceContainer.copy(alpha = 0.7f))
+            .background(colorScheme.surfaceContainerLow.copy(alpha = 0.7f))
             .clip(MaterialTheme.shapes.medium),
         content = {
             val initiallyVisible = state.messages.isNotEmpty()
-            val text = "Hola, ¿en qué puedo ayudarte?"
+            val text = "Hola soy Eva, ¿en qué puedo ayudarte?"
             var displayedText by remember(
                 text,
                 initiallyVisible

@@ -20,6 +20,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -44,10 +45,6 @@ fun TakeAttendanceRoot(
     viewModel: TakeAttendanceViewModel = koinViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-
-    LaunchedEffect(Unit) {
-        viewModel.onAction(TakeAttendanceAction.LoadCourses)
-    }
 
     TakeAttendanceScreen(
         state = state,
@@ -74,7 +71,7 @@ private fun TakeAttendanceScreen(
                 contentAlignment = Alignment.Center
             ) {
                 CircularProgressIndicator(
-                    color = Color(0xFF4CAF50)
+                    color = colorScheme.primary
                 )
             }
             return
@@ -84,13 +81,13 @@ private fun TakeAttendanceScreen(
         state.error?.let { error ->
             Card(
                 colors = CardDefaults.cardColors(
-                    containerColor = Color(0xFFffebee)
+                    containerColor = colorScheme.errorContainer
                 ),
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
                     text = error,
-                    color = Color(0xFFc62828),
+                    color = colorScheme.onErrorContainer,
                     modifier = Modifier.padding(16.dp)
                 )
             }
@@ -101,7 +98,7 @@ private fun TakeAttendanceScreen(
             courses = state.courses,
             selectedCourse = state.selectedCourse,
             onCourseSelected = { course ->
-                onAction(TakeAttendanceAction.SelectCourse(course.id))
+                onAction(TakeAttendanceAction.SelectCourse(course.id?:""))
             }
         )
 
@@ -133,7 +130,7 @@ private fun TakeAttendanceScreen(
                         Card(
                             modifier = Modifier.fillMaxWidth(),
                             colors = CardDefaults.cardColors(
-                                containerColor = Color.Gray.copy(alpha = 0.1f)
+                                containerColor = colorScheme.primaryContainer.copy(alpha = 0.1f)
                             )
                         ) {
                             Column(
@@ -145,13 +142,13 @@ private fun TakeAttendanceScreen(
                                 Text(
                                     text = "No hay estudiantes registrados",
                                     style = MaterialTheme.typography.titleMedium,
-                                    color = Color.Gray
+                                    color = colorScheme.onPrimaryContainer
                                 )
                                 Spacer(modifier = Modifier.height(8.dp))
                                 Text(
                                     text = "Agrega estudiantes al curso para poder tomar asistencia",
                                     style = MaterialTheme.typography.bodyMedium,
-                                    color = Color.Gray
+                                    color = colorScheme.onPrimaryContainer
                                 )
                             }
                         }
@@ -223,20 +220,22 @@ private fun TakeAttendanceScreen(
                     onClick = { onAction(TakeAttendanceAction.SaveAttendance) },
                     modifier = Modifier.fillMaxWidth(),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF4CAF50)
+                        containerColor = colorScheme.secondaryContainer
                     ),
                     contentPadding = PaddingValues(vertical = 16.dp)
                 ) {
                     Icon(
                         painter = painterResource(Res.drawable.save_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24),
                         contentDescription = null,
-                        modifier = Modifier.size(20.dp)
+                        modifier = Modifier.size(20.dp),
+                        tint = colorScheme.onSecondaryContainer
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
                         text = "Guardar Asistencia",
                         style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Medium
+                        fontWeight = FontWeight.Medium,
+                        color = colorScheme.onSecondaryContainer
                     )
                 }
             }
@@ -245,7 +244,7 @@ private fun TakeAttendanceScreen(
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 colors = CardDefaults.cardColors(
-                    containerColor = Color(0xFF4CAF50).copy(alpha = 0.1f)
+                    containerColor = colorScheme.primaryContainer
                 )
             ) {
                 Column(
@@ -258,13 +257,13 @@ private fun TakeAttendanceScreen(
                         text = "Selecciona un curso",
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Medium,
-                        color = Color(0xFF4CAF50)
+                        color = colorScheme.onPrimaryContainer
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = "Para comenzar a tomar asistencia, selecciona un curso de la lista",
                         style = MaterialTheme.typography.bodyMedium,
-                        color = Color.Gray
+                        color = colorScheme.onPrimaryContainer
                     )
                 }
             }
@@ -274,13 +273,13 @@ private fun TakeAttendanceScreen(
         if (state.isAttendanceSaved) {
             Card(
                 colors = CardDefaults.cardColors(
-                    containerColor = Color(0xFFe8f5e8)
+                    containerColor = colorScheme.primaryContainer
                 ),
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
                     text = "¡Asistencia guardada exitosamente!",
-                    color = Color(0xFF2e7d32),
+                    color = colorScheme.onPrimaryContainer,
                     fontWeight = FontWeight.Medium,
                     modifier = Modifier.padding(16.dp)
                 )

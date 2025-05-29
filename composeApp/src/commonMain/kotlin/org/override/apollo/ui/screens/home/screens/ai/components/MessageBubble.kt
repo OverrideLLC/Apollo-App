@@ -25,12 +25,12 @@ internal fun MessageBubble(
     onAction: (AiAction) -> Unit,
 ) {
     val backgroundColor by animateColorAsState(
-        targetValue = if (message.isUser) colorScheme.primaryContainer else colorScheme.surface,
+        targetValue = if (message.isUser) colorScheme.surfaceContainerLowest else colorScheme.surfaceContainerLowest,
         animationSpec = tween(durationMillis = 300)
     )
 
     val textColor by animateColorAsState(
-        targetValue = if (message.isUser) colorScheme.onPrimary else colorScheme.onSurface,
+        targetValue = if (message.isUser) colorScheme.onSurface else colorScheme.onSurface,
         animationSpec = tween(durationMillis = 300)
     )
 

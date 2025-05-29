@@ -17,4 +17,12 @@ class CourseRepository(
     suspend fun getCourseById(id: String): Course? {
         return service.getCourseById(id).courses?.firstOrNull()
     }
+
+    suspend fun updateCourse(course: Course) {
+        service.updateCourse(course)
+    }
+
+    suspend fun deleteCourse(id: String) {
+        service.deleteCourse(id)
+    }
 }

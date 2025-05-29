@@ -2,6 +2,7 @@ package org.override.apollo.ui.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
+import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,7 +37,7 @@ fun DialogHeader(
                 Icon(
                     painter = painterResource(icon),
                     contentDescription = null,
-                    tint = Color(0xFF2E8B57),
+                    tint = colorScheme.onSurface,
                     modifier = Modifier.size(34.dp)
                 )
                 Spacer(modifier = Modifier.width(12.dp))
@@ -44,9 +45,9 @@ fun DialogHeader(
             
             Text(
                 text = title,
-                fontSize = 20.sp,
-                fontWeight = FontWeight.SemiBold,
-                color = MaterialTheme.colorScheme.onSurface
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Normal,
+                color = colorScheme.onSurface
             )
         }
         
@@ -57,7 +58,7 @@ fun DialogHeader(
             Icon(
                 painter = painterResource(Res.drawable.cancel_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24),
                 contentDescription = "Cerrar",
-                tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                tint = colorScheme.onSurface
             )
         }
     }

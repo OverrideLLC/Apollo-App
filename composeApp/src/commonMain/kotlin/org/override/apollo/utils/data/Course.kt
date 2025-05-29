@@ -13,4 +13,8 @@ data class Course(
     val studentIds: List<String>? = null, // Lista de IDs de estudiantes
     val attendanceIds: Map<String, List<String>>? = null, // Clave: fecha, Valor: Lista de IDs de asistencia
     val assignmentsIds: List<String>? = null //Lista de IDs de tareas
-)
+) {
+    override fun toString(): String {
+        return name ?: ""
+    }
+}

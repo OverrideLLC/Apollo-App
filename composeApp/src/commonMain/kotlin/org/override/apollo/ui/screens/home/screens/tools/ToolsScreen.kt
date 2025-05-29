@@ -72,7 +72,7 @@ private fun ToolsScreen(
 ) {
     Box(
         modifier = modifier
-            .background(colorScheme.surfaceContainer.copy(alpha = 0.7f))
+            .background(colorScheme.surfaceContainerLow.copy(alpha = 0.7f))
             .clip(shape = shapes.medium),
         content = {
             Column(
@@ -96,7 +96,7 @@ private fun ToolsScreen(
                         .align(Alignment.Start)
                         .padding(10.dp)
                         .background(
-                            color = colorScheme.surface,
+                            color = colorScheme.surfaceContainerLowest,
                             shape = shapes.small
                         )
                 )
@@ -146,7 +146,7 @@ fun ItemTool(
                 .height(50.dp)
                 .clickable { click() }
                 .background(
-                    color = colorScheme.surface,
+                    color = colorScheme.surfaceContainerLowest,
                     shape = shapes.small
                 ),
             contentAlignment = Alignment.Center,
@@ -179,7 +179,7 @@ fun ItemTool(
             modifier = Modifier
                 .size(50.dp)
                 .background(
-                    color = colorScheme.surface,
+                    color = colorScheme.surfaceContainerLowest,
                     shape = shapes.small
                 )
                 .clickable { click() },

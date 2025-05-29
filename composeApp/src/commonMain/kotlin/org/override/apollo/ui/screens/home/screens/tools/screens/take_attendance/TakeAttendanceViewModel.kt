@@ -2,6 +2,7 @@ package org.override.apollo.ui.screens.home.screens.tools.screens.take_attendanc
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dev.shreyaspatil.ai.client.generativeai.common.util.Log
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -9,14 +10,17 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.override.apollo.ui.screens.home.screens.tools.screens.take_attendance.utils.Course
-import org.override.apollo.ui.screens.home.screens.tools.screens.take_attendance.utils.Student
+import org.override.apollo.domain.repositories.CourseRepository
+import org.override.apollo.domain.repositories.StudentRepository
 
-class TakeAttendanceViewModel : ViewModel() {
+class TakeAttendanceViewModel(
+    private val courseRepository: CourseRepository,
+    private val studentRepository: StudentRepository
+) : ViewModel() {
 
     private val _state = MutableStateFlow(TakeAttendanceState())
     val state = _state
-        .onStart { }
+        .onStart { loadCourses() }
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5_000L),
@@ -127,9 +131,8 @@ class TakeAttendanceViewModel : ViewModel() {
                     error = null
                 )
             }
-
-            // Cargar estudiantes del curso seleccionado
-            loadStudentsForCourse(courseId)
+            if (_state.value.selectedCourse?.studentIds != null)
+                loadStudentsForCourse(courseId)
         }
     }
 
@@ -138,135 +141,15 @@ class TakeAttendanceViewModel : ViewModel() {
             _state.update { it.copy(isLoading = true, error = null) }
 
             try {
-                // Simular carga de estudiantes
-                delay(800)
-
-                // Mock data de estudiantes - aquí conectarías con tu repositorio real
-                val mockStudents = when (courseId) {
-                    "1" -> listOf( // Matemáticas
-                        Student(
-                            id = "s1",
-                            name = "Ana García López",
-                            matricula = "2021001",
-                            email = "ana.garcia@ejemplo.com",
-                            phone = "555-0101"
-                        ),
-                        Student(
-                            id = "s2",
-                            name = "Carlos Mendoza Rivera",
-                            matricula = "2021002",
-                            email = "carlos.mendoza@ejemplo.com",
-                            phone = "555-0102"
-                        ),
-                        Student(
-                            id = "s3",
-                            name = "María Elena Vargas",
-                            matricula = "2021003",
-                            email = "maria.vargas@ejemplo.com",
-                            phone = "555-0103"
-                        ),
-                        Student(
-                            id = "s4",
-                            name = "José Luis Martínez",
-                            matricula = "2021004",
-                            email = "jose.martinez@ejemplo.com",
-                            phone = "555-0104"
-                        ),
-                        Student(
-                            id = "s5",
-                            name = "Sofía Hernández Cruz",
-                            matricula = "2021005",
-                            email = "sofia.hernandez@ejemplo.com",
-                            phone = "555-0105"
-                        )
-                    )
-                    "2" -> listOf( // Programación
-                        Student(
-                            id = "s6",
-                            name = "Diego Ramírez Flores",
-                            matricula = "2022001",
-                            email = "diego.ramirez@ejemplo.com",
-                            phone = "555-0201"
-                        ),
-                        Student(
-                            id = "s7",
-                            name = "Isabella Torres Morales",
-                            matricula = "2022002",
-                            email = "isabella.torres@ejemplo.com",
-                            phone = "555-0202"
-                        ),
-                        Student(
-                            id = "s8",
-                            name = "Alejandro Castillo Ruiz",
-                            matricula = "2022003",
-                            email = "alejandro.castillo@ejemplo.com",
-                            phone = "555-0203"
-                        ),
-                        Student(
-                            id = "s9",
-                            name = "Valentina Sánchez Ortega",
-                            matricula = "2022004",
-                            email = "valentina.sanchez@ejemplo.com",
-                            phone = "555-0204"
-                        )
-                    )
-                    "3" -> listOf( // Base de Datos
-                        Student(
-                            id = "s10",
-                            name = "Fernando Gutiérrez Vega",
-                            matricula = "2020001",
-                            email = "fernando.gutierrez@ejemplo.com",
-                            phone = "555-0301"
-                        ),
-                        Student(
-                            id = "s11",
-                            name = "Camila Jiménez Peña",
-                            matricula = "2020002",
-                            email = "camila.jimenez@ejemplo.com",
-                            phone = "555-0302"
-                        ),
-                        Student(
-                            id = "s12",
-                            name = "Ricardo Moreno Silva",
-                            matricula = "2020003",
-                            email = "ricardo.moreno@ejemplo.com",
-                            phone = "555-0303"
-                        ),
-                        Student(
-                            id = "s13",
-                            name = "Gabriela Ramos Castro",
-                            matricula = "2020004",
-                            email = "gabriela.ramos@ejemplo.com",
-                            phone = "555-0304"
-                        ),
-                        Student(
-                            id = "s14",
-                            name = "Sebastián Luna Herrera",
-                            matricula = "2020005",
-                            email = "sebastian.luna@ejemplo.com",
-                            phone = "555-0305"
-                        ),
-                        Student(
-                            id = "s15",
-                            name = "Andrea Molina Espinoza",
-                            matricula = "2020006",
-                            email = "andrea.molina@ejemplo.com",
-                            phone = "555-0306"
-                        )
-                    )
-                    else -> emptyList()
-                }
-
-                // Inicializar registros de asistencia (todos ausentes por defecto)
-                val initialAttendanceRecords = mockStudents.associate { student ->
-                    student.id to false
-                }
+                val students = studentRepository.getAllStudents(courseId)
 
                 _state.update {
                     it.copy(
                         isLoading = false,
-                        students = mockStudents,
-                        attendanceRecords = initialAttendanceRecords,
+                        students = students,
+                        attendanceRecords = students.associate { student ->
+                            student.id to false
+                        },
                         error = null
                     )
                 }
@@ -289,38 +172,12 @@ class TakeAttendanceViewModel : ViewModel() {
             _state.update { it.copy(isLoading = true, error = null) }
 
             try {
-                // Simular carga de datos
-                delay(1000)
-
-                // Mock data - aquí conectarías con tu repositorio real
-                val mockCourses = listOf(
-                    Course(
-                        id = "1",
-                        name = "Matemáticas",
-                        career = "Ingeniería en Sistemas",
-                        section = "A",
-                        grade = "3er año"
-                    ),
-                    Course(
-                        id = "2",
-                        name = "Programación",
-                        career = "Ingeniería en Sistemas",
-                        section = "B",
-                        grade = "2do año"
-                    ),
-                    Course(
-                        id = "3",
-                        name = "Base de Datos",
-                        career = "Ingeniería en Sistemas",
-                        section = "A",
-                        grade = "4to año"
-                    )
-                )
-
+                val courses = courseRepository.getCourses()
+                Log.w("TakeAttendanceViewModel", "Loaded courses: $courses")
                 _state.update {
                     it.copy(
                         isLoading = false,
-                        courses = mockCourses,
+                        courses = courses,
                         error = null
                     )
                 }

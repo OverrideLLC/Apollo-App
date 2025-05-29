@@ -37,10 +37,7 @@ actual val commonHttpClient: HttpClient by lazy { // Usando lazy para inicializa
         }
 
         // 2. Logging
-        install(Logging) {
-            logger = Logger.DEFAULT // O Logger.SIMPLE, o un logger personalizado
-            level = if (BuildConfig.DEBUG) LogLevel.BODY else LogLevel.INFO
-        }
+        install(Logging)
 
         // 3. Timeouts
         install(HttpTimeout) {

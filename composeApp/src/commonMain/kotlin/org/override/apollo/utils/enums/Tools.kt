@@ -5,6 +5,7 @@ import androidx.compose.ui.unit.dp
 import apollo_app.composeapp.generated.resources.Res
 import apollo_app.composeapp.generated.resources.add_circle_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24
 import apollo_app.composeapp.generated.resources.fact_check_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24
+import apollo_app.composeapp.generated.resources.groups_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24
 import apollo_app.composeapp.generated.resources.person_add_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24
 import org.jetbrains.compose.resources.DrawableResource
 import org.override.apollo.utils.route.RoutesTool
@@ -32,6 +33,11 @@ enum class Tools(
         route = RoutesTool.AddStudent.route,
         nameString = "Agregar Estudiante", // Traducido de "Add Student"
         size = DpSize(width = 600.dp, height = 850.dp)
-
     ),
+    Course(
+        icon = Res.drawable.groups_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24,
+        route = RoutesTool.Courses.route,
+        nameString = "Cursos",
+        size = DpSize(width = 1200.dp, height = 1200.dp)
+    )
 }

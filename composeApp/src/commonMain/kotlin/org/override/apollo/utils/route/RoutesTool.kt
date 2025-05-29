@@ -6,4 +6,5 @@ sealed class RoutesTool(val route: String) {
     object AddStudent : RoutesTool("add_student")
     object Announce : RoutesTool("announce")
     object Ratings : RoutesTool("ratings")
+    object Courses : RoutesTool("courses")
 }
